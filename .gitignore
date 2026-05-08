@@ -1,0 +1,6 @@
+bookease-backend/node_modules/
+bookease-backend/.env
+bookease-frontend/node_modules/
+bookease-frontend/.env
+*.log
+.DS_Store
