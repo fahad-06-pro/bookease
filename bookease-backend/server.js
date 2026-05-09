@@ -53,6 +53,9 @@ require("./models/Notification");
 
 // Routes
 app.use("/api/auth", require("./routes/authRoutes"));
+app.use("/api/businesses", require("./routes/businessRoutes"));
+app.use("/api/services", require("./routes/serviceRoutes"));
+app.use("/api/availability", require("./routes/availabilityRoutes"));
 
 // Health check
 app.get("/", (req, res) => {

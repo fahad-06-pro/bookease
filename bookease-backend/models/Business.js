@@ -89,8 +89,8 @@ const businessSchema = new mongoose.Schema(
 );
 
 // Auto-generate unique slug
-businessSchema.pre("save", async function (next) {
-  if (!this.isModified("name")) return next();
+businessSchema.pre("save", async function () {
+  if (!this.isModified("name")) return;
   let baseSlug = slugify(this.name, { lower: true, strict: true });
   let slug = baseSlug;
   let count = 1;
@@ -101,7 +101,6 @@ businessSchema.pre("save", async function (next) {
     count++;
   }
   this.slug = slug;
-  next();
 });
 
 // Virtuals
