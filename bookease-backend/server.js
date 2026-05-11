@@ -13,6 +13,9 @@ connectDB();
 
 const app = express();
 
+// Stripe webhook — raw body chahiye (routes se pehle)
+app.use("/api/payments/webhook", express.raw({ type: "application/json" }));
+
 // Body parser
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
@@ -56,6 +59,8 @@ app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/businesses", require("./routes/businessRoutes"));
 app.use("/api/services", require("./routes/serviceRoutes"));
 app.use("/api/availability", require("./routes/availabilityRoutes"));
+app.use("/api/bookings", require("./routes/bookingRoutes"));
+app.use("/api/payments", require("./routes/paymentRoutes"));
 
 // Health check
 app.get("/", (req, res) => {
