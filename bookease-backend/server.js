@@ -7,6 +7,7 @@ const morgan = require("morgan");
 const rateLimit = require("express-rate-limit");
 const connectDB = require("./config/db");
 const errorHandler = require("./middleware/errorHandler");
+const startCronJobs = require("./utils/cronJobs");
 
 dotenv.config();
 connectDB();
@@ -61,6 +62,8 @@ app.use("/api/services", require("./routes/serviceRoutes"));
 app.use("/api/availability", require("./routes/availabilityRoutes"));
 app.use("/api/bookings", require("./routes/bookingRoutes"));
 app.use("/api/payments", require("./routes/paymentRoutes"));
+app.use("/api/reviews", require("./routes/reviewRoutes"));
+app.use("/api/notifications", require("./routes/notificationRoutes"));
 
 // Health check
 app.get("/", (req, res) => {
@@ -69,6 +72,9 @@ app.get("/", (req, res) => {
 
 // Error handler
 app.use(errorHandler);
+
+// Start cron jobs
+startCronJobs();
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
